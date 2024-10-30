@@ -1,42 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aagharbi <aagharbi@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/28 10:02:15 by aagharbi          #+#    #+#             */
-/*   Updated: 2024/10/30 17:11:23 by aagharbi         ###   ########.fr       */
+/*   Created: 2024/10/30 10:57:33 by aagharbi          #+#    #+#             */
+/*   Updated: 2024/10/30 11:31:03 by aagharbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
+#include <stdlib.h>
 
-char	*ft_substr(const char *s, unsigned int start, size_t len)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	char	*new_str;
-	char	*strt;
-	char	*fault;
+	char	*str;
+	size_t	i;
 
-	new_str = (char *) malloc (len + 1);
-	if (start > strlen(s))
+	i = 0;
+	if (s == NULL)
 		return (NULL);
-	if (new_str == NULL)
+	str = malloc(strlen(s) + 1);
+	if (str == NULL)
 		return (NULL);
-	strt = new_str;
-	while (len--)
+	while (s[i])
 	{
-		*new_str++ = s[start++];
+		str[i] = f(i, s[i]);
+		i++;
 	}
-	*new_str = '\0';
-	return (strt);
+	str[i] = '\0';
+	return (str);
 }
-
-/*int main ()
+/*char	f(unsigned int i, char c)
 {
-	char a[] = "aymane";
 
-	printf("%s", ft_substr(a, 10000,3));
-}
+	if (c >= 65 && c <= 90)
+		return c + 32;
+	return c;
+	
+}*/

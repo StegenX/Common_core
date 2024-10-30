@@ -1,37 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aagharbi <aagharbi@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/24 16:19:39 by aagharbi          #+#    #+#             */
-/*   Updated: 2024/10/29 14:59:55 by aagharbi         ###   ########.fr       */
+/*   Created: 2024/10/28 16:07:01 by aagharbi          #+#    #+#             */
+/*   Updated: 2024/10/29 11:24:04 by aagharbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <string.h>
+#include "libft.h"
 
-size_t	ft_strlcat(char *dst, const char *src, size_t size)
+void	ft_putnbr_fd(int n, int fd)
 {
+	char	nbr[11];
 	size_t	i;
-	size_t	len;
-	size_t	d_len;
 
-	len = strlen(dst) + strlen(src);
 	i = 0;
-	if (size <= strlen(dst))
+	if (n == -2147483648)
+		write(fd, "-2147483648", 11);
+	if (n == 0)
+		write(fd, "0", 1);
+	if (n < 0)
 	{
-		return (len);
+		write(fd, "-", 1);
+		n = -n;
 	}
-	d_len = strlen(dst);
-	while ((i < size - (len- strlen(src)) && src[i]))
+	while (n > 0)
 	{
-		dst[d_len] = src[i];
-		i++;
-		d_len++;
+		nbr[i++] = (n % 10) + '0';
+		n = n / 10;
 	}
-	dst[d_len] = '\0';
-	return (len);
+	i = i - 1;
+	while (nbr[i])
+	{
+		write(fd, &nbr[i], 1);
+		i--;
+	}
 }

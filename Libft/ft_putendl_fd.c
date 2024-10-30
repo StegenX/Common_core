@@ -1,42 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aagharbi <aagharbi@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/28 10:02:15 by aagharbi          #+#    #+#             */
-/*   Updated: 2024/10/30 17:11:23 by aagharbi         ###   ########.fr       */
+/*   Created: 2024/10/28 15:54:00 by aagharbi          #+#    #+#             */
+/*   Updated: 2024/10/28 16:00:14 by aagharbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <unistd.h>
 
-char	*ft_substr(const char *s, unsigned int start, size_t len)
+void	ft_putendl_fd(char *s, int fd)
 {
-	char	*new_str;
-	char	*strt;
-	char	*fault;
-
-	new_str = (char *) malloc (len + 1);
-	if (start > strlen(s))
-		return (NULL);
-	if (new_str == NULL)
-		return (NULL);
-	strt = new_str;
-	while (len--)
+	while (*s)
 	{
-		*new_str++ = s[start++];
+		write(fd, s, 1);
+		s++;
 	}
-	*new_str = '\0';
-	return (strt);
+	write(fd,"\n", 1);
 }
 
-/*int main ()
+int main()
 {
 	char a[] = "aymane";
 
-	printf("%s", ft_substr(a, 10000,3));
+	ft_putendl_fd(a, 1);
 }

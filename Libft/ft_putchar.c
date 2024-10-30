@@ -1,37 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   ft_putchr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aagharbi <aagharbi@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/24 16:19:39 by aagharbi          #+#    #+#             */
-/*   Updated: 2024/10/29 14:59:55 by aagharbi         ###   ########.fr       */
+/*   Created: 2024/10/28 15:11:22 by aagharbi          #+#    #+#             */
+/*   Updated: 2024/10/28 15:40:00 by aagharbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <string.h>
+#include "libft.h"
 
-size_t	ft_strlcat(char *dst, const char *src, size_t size)
+void ft_putchar_fd(char c, int fd)
 {
-	size_t	i;
-	size_t	len;
-	size_t	d_len;
-
-	len = strlen(dst) + strlen(src);
-	i = 0;
-	if (size <= strlen(dst))
-	{
-		return (len);
-	}
-	d_len = strlen(dst);
-	while ((i < size - (len- strlen(src)) && src[i]))
-	{
-		dst[d_len] = src[i];
-		i++;
-		d_len++;
-	}
-	dst[d_len] = '\0';
-	return (len);
+	write(fd, &c, 1);
 }

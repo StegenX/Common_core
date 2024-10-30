@@ -1,42 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aagharbi <aagharbi@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/28 10:02:15 by aagharbi          #+#    #+#             */
-/*   Updated: 2024/10/30 17:11:23 by aagharbi         ###   ########.fr       */
+/*   Created: 2024/10/30 11:31:44 by aagharbi          #+#    #+#             */
+/*   Updated: 2024/10/30 13:06:47 by aagharbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
-char	*ft_substr(const char *s, unsigned int start, size_t len)
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-	char	*new_str;
-	char	*strt;
-	char	*fault;
+	size_t	i;
 
-	new_str = (char *) malloc (len + 1);
-	if (start > strlen(s))
-		return (NULL);
-	if (new_str == NULL)
-		return (NULL);
-	strt = new_str;
-	while (len--)
+	i = 0;
+	while (s[i])
 	{
-		*new_str++ = s[start++];
+		f(i, &s[i]);
+		i++;
 	}
-	*new_str = '\0';
-	return (strt);
 }
 
-/*int main ()
+/*void	f(unsigned int i, char *s)
 {
-	char a[] = "aymane";
-
-	printf("%s", ft_substr(a, 10000,3));
-}
+	if (*s >= 65 && *s <= 90)
+		*s += 32;
+}*/
