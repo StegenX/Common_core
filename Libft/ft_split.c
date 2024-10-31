@@ -39,7 +39,7 @@ char	*ft_substr(const char *s, unsigned int start, size_t len)
 	char	*fault;
 
 	new_str = (char *) malloc (len + 1);
-	if (start > strlen(s))
+	if (start > ft_strlen(s))
 		return (NULL);
 	if (new_str == NULL)
 		return (NULL);
