@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <string.h>
+#include "libft.h"
 
 void	*ft_memmove(void *dest, const void *src, size_t len)
 {
@@ -32,11 +31,4 @@ void	*ft_memmove(void *dest, const void *src, size_t len)
 	else
 		memcpy(dst, srcc, len);
 	return (dest);
-}
-
-int main ()
-{
-	char str[] = "aymane is here";
-	char *ptr = ft_memmove(str + 11 ,str, 6);
-	printf("%s", ptr);
 }
