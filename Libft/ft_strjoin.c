@@ -23,7 +23,7 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	strings_cat = (char *) malloc(s1_len + s2_len);
 	if (strings_cat == NULL)
 		return (NULL);
-	strlcpy(strings_cat, s1);
-	strlcat(strings_cat, s2);
+	ft_strlcpy(strings_cat, s1, s1_len);
+	ft_strlcat(strings_cat, s2, s2_len);
 	return (strings_cat);
 }
