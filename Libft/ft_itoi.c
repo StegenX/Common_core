@@ -22,7 +22,7 @@ char	*ft_putnbr(int n)
 	num = (n < 0) ? -n : n;
 	i = 0;
 	if (n == 0)
-		return strdup("0");
+		return ft_strdup("0");
 	while (num > 0)
 	{
 		nbr[i++] = (num % 10) + '0';
@@ -43,6 +43,6 @@ char	*ft_putnbr(int n)
 char	*ft_itoa(int nbr)
 {
 	if (nbr == -2147483648)
-		return strdup("-2147483648");
+		return ft_strdup("-2147483648");
 	return ft_putnbr(nbr);
 }
