@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "libft.h"
 
 void	ft_putendl_fd(char *s, int fd)
 {
@@ -20,11 +20,4 @@ void	ft_putendl_fd(char *s, int fd)
 		s++;
 	}
 	write(fd,"\n", 1);
-}
-
-int main()
-{
-	char a[] = "aymane";
-
-	ft_putendl_fd(a, 1);
 }
