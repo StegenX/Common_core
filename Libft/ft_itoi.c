@@ -6,7 +6,7 @@
 /*   By: aagharbi <aagharbi@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 13:08:32 by aagharbi          #+#    #+#             */
-/*   Updated: 2024/10/30 17:13:14 by aagharbi         ###   ########.fr       */
+/*   Updated: 2024/10/30 17:33:18 by aagharbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ char	*ft_putnbr(int n)
 	i = 0;
 	if (n == 0)
 		return strdup("0");
-	while (n > 0)
+	while (num > 0)
 	{
-		nbr[i++] = (n % 10) + '0';
-		n /= 10;
+		nbr[i++] = (num % 10) + '0';
+		num /= 10;
 	}
         char *result = (char *)malloc(i + 1);
 	if (!result)
@@ -48,13 +48,10 @@ char	*ft_itoa(int nbr)
 		return strdup("-2147483648");
 	return ft_putnbr(nbr);
 }
-
-int main ()
+/*int main ()
 {
-	char *a = ft_itoa(-112233);
+	char *a = ft_itoa(-211332213);
 	printf("%s", a);
 	free(a);
 	return 0;
 }
-  
-
