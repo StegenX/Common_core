@@ -10,9 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
+#include "libft.h"
 
 char	*ft_putnbr(int n)
 {
@@ -47,11 +45,4 @@ char	*ft_itoa(int nbr)
 	if (nbr == -2147483648)
 		return strdup("-2147483648");
 	return ft_putnbr(nbr);
-}
-/*int main ()
-{
-	char *a = ft_itoa(-211332213);
-	printf("%s", a);
-	free(a);
-	return 0;
 }
