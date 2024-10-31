@@ -10,9 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
+#include "libft.h"
 
 int	count_words(const char *str, char c) {
 	int	count;
@@ -106,19 +104,3 @@ char	**ft_split(char const *s, char c) {
 	lst[i] = NULL;
 	return (lst);
 }
-
-int main() {
-    char str[] = "I'm/at/1337/that/belong/to/42/the/network";
-    char **words = ft_split(str, '/');
-
-    if (words) {
-        for (int i = 0; words[i] != NULL; i++) {
-            printf("%s\n", words[i]);
-            free(words[i]);  // Free each duplicated word
-        }
-        free(words);  // Free the array itself
-    }
-
-    return 0;
-}
-
