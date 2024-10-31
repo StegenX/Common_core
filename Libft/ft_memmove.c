@@ -29,6 +29,6 @@ void	*ft_memmove(void *dest, const void *src, size_t len)
 			*(--dst) = *(--srcc);
 	}
 	else
-		memcpy(dst, srcc, len);
+		ft_memcpy(dst, srcc, len);
 	return (dest);
 }
