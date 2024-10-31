@@ -21,15 +21,15 @@ char	*ft_strtrim(const char *s1, const char *set)
 
 	i = 0;
 	start = 0;
-	while (s1[start] && strchr(set, s1[start]))
+	while (s1[start] && ft_strchr(set, s1[start]))
 		start++;
-	end = strlen(s1);
-	while (end > start && strchr(set, s1[end - 1]))
+	end = ft_strlen(s1);
+	while (end > start && ft_strchr(set, s1[end - 1]))
 		end--;
 	new_string = (char *)malloc(end - start + 1);
 	if (new_string == NULL)
 		return (NULL);
-	memcpy(new_string, s1 + start, end - start + 1);
+	ft_memcpy(new_string, s1 + start, end - start + 1);
 	new_string[end - start] = '\0';
 	return (new_string);
 }
