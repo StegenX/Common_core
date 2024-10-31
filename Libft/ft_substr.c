@@ -10,9 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include "libft.h"
 
 char	*ft_substr(const char *s, unsigned int start, size_t len)
 {
@@ -32,11 +30,4 @@ char	*ft_substr(const char *s, unsigned int start, size_t len)
 	}
 	*new_str = '\0';
 	return (strt);
-}
-
-/*int main ()
-{
-	char a[] = "aymane";
-
-	printf("%s", ft_substr(a, 10000,3));
 }
