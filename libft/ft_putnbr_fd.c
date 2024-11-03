@@ -6,7 +6,7 @@
 /*   By: aagharbi <aagharbi@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 16:07:01 by aagharbi          #+#    #+#             */
-/*   Updated: 2024/11/02 20:42:37 by aagharbi         ###   ########.fr       */
+/*   Updated: 2024/11/03 20:45:58 by aagharbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,33 +15,26 @@
 void	ft_putnbr_fd(int n, int fd)
 {
 	char	nbr[12];
-	size_t	i;
+	int		i;
+	long	num;
 
+	num = n;
 	i = 0;
-	if (n == -2147483648)
-	{
-		write(fd, "-2147483648", 11);
-		return;
-	}
 	if (n == 0)
 	{
 		write(fd, "0", 1);
-		return;
+		return ;
 	}
-	if (n < 0)
+	if (num < 0)
 	{
 		write(fd, "-", 1);
-		n = -n;
+		num = -num;
 	}
-	while (n > 0)
+	while (num > 0)
 	{
-		nbr[i++] = (n % 10) + '0';
-		n = n / 10;
+		nbr[i++] = (num % 10) + '0';
+		num = num / 10;
 	}
-	i = i - 1;
-	while (nbr[i])
-	{
+	while (--i >= 0)
 		write(fd, &nbr[i], 1);
-		i--;
-	}
 }

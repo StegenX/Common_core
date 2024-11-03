@@ -6,7 +6,7 @@
 /*   By: aagharbi <aagharbi@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 17:31:59 by aagharbi          #+#    #+#             */
-/*   Updated: 2024/11/02 14:38:27 by aagharbi         ###   ########.fr       */
+/*   Updated: 2024/11/03 15:02:02 by aagharbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,25 +21,25 @@ static int	count_words(const char *str, char c)
 	flag = 0;
 	while (*str)
 	{
-	    if (*str != c && flag == 0)
-	    {
-		    flag = 1;
-		    count++;
-	    }
-	    else if (*str == c)
-		    flag = 0;
-	    str++;
+		if (*str != c && flag == 0)
+		{
+			flag = 1;
+			count++;
+		}
+		else if (*str == c)
+			flag = 0;
+		str++;
 	}
 	return (count);
 }
 
 static void	free_split(char **lst)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!lst)
-		return;
+		return ;
 	while (lst[i])
 	{
 		free(lst[i]);
@@ -48,30 +48,24 @@ static void	free_split(char **lst)
 	free(lst);
 }
 
-char	**ft_split(char const *s, char c)
+static void	fill(char const *s, char c, char **lst)
 {
-	char	**lst;
 	size_t	word_len;
-	int	i;
+	int		i;
 
-	if (!s)
-		return NULL;
 	i = 0;
-	lst = malloc((count_words(s, c) + 1) * sizeof(char *));
-	if (!lst)
-		return NULL;
 	while (*s)
 	{
-		if (*s != c)
+		if (*s && *s != c)
 		{
-			word_len = 0;
-			while (s[word_len] && s[word_len] != c)
-				word_len++;
+			word_len = ft_strlen(s);
+			if (ft_strchr(s, c))
+				word_len = ft_strchr(s, c) - s;
 			lst[i] = ft_substr(s, 0, word_len);
 			if (!lst[i])
 			{
 				free_split(lst);
-				return NULL;
+				return ;
 			}
 			i++;
 			s += word_len;
@@ -80,5 +74,19 @@ char	**ft_split(char const *s, char c)
 			s++;
 	}
 	lst[i] = NULL;
+}
+
+char	**ft_split(char const *s, char c)
+{
+	char	**lst;
+	int		i;
+
+	i = 0;
+	if (!s)
+		return (NULL);
+	lst = malloc((count_words(s, c) + 1) * sizeof(char *));
+	if (!lst)
+		return (NULL);
+	fill(s, c, lst);
 	return (lst);
 }

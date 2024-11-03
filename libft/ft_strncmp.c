@@ -6,12 +6,12 @@
 /*   By: aagharbi <aagharbi@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 08:48:00 by aagharbi          #+#    #+#             */
-/*   Updated: 2024/11/02 20:15:56 by aagharbi         ###   ########.fr       */
+/*   Updated: 2024/11/03 11:47:39 by aagharbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "libft.h"
+
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
 	size_t	i;

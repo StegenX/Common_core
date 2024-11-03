@@ -6,44 +6,51 @@
 /*   By: aagharbi <aagharbi@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 13:08:32 by aagharbi          #+#    #+#             */
-/*   Updated: 2024/11/02 20:38:59 by aagharbi         ###   ########.fr       */
+/*   Updated: 2024/11/03 20:45:00 by aagharbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char	*ft_putnbr(int n)
+size_t	ft_nb_len(int nb)
 {
-	char	nbr[12];
-	size_t	i;
-	size_t	j;
-	int	num;
-	char	*result;
-	    
-	num = (n < 0) ? -n : n;
-	i = 0;
-	if (n == -2147483648)
-                return ft_strdup("-2147483648");
-	if (n == 0)
-		return ft_strdup("0");
-	while (num > 0)
+	int	len;
+
+	len = 0;
+	if (nb <= 0)
+		len++;
+	while (nb)
 	{
-		nbr[i++] = (num % 10) + '0';
-		num /= 10;
+		len++;
+		nb = nb / 10;
 	}
-        result = malloc(i + (n < 0 ? 2 : 1));
-	if (!result)
-		return NULL;
-	j = 0;
-	if (n < 0)
-		result[j++] = '-';
-	while (i > 0)
-		result[j++] = nbr[--i];
-	result[j] = '\0';
-	return result;
+	return (len);
 }
 
-char	*ft_itoa(int nbr)
+char	*ft_itoa(int n)
 {
-	return ft_putnbr(nbr);
+	int		len;
+	char	*str;
+	long	nb;
+
+	if (n == 0)
+		return (ft_strdup("0"));
+	len = ft_nb_len(n);
+	nb = n;
+	str = malloc(len + 1);
+	if (!str)
+		return (NULL);
+	if (nb < 0)
+	{
+		str[0] = '-';
+		nb = -nb;
+	}
+	str[len--] = '\0';
+	while (nb)
+	{
+		str[len] = nb % 10 + '0';
+		len--;
+		nb = nb / 10;
+	}
+	return (str);
 }

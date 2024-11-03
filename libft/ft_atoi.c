@@ -6,7 +6,7 @@
 /*   By: aagharbi <aagharbi@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 09:12:25 by aagharbi          #+#    #+#             */
-/*   Updated: 2024/10/27 11:42:27 by aagharbi         ###   ########.fr       */
+/*   Updated: 2024/11/03 11:35:50 by aagharbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	ft_atoi(const char *nptr)
 	{
 		if (*nptr++ == '-')
 			sign = -1;
-		
 	}
 	while (*nptr >= 48 && *nptr <= 57)
 	{

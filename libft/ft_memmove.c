@@ -6,7 +6,7 @@
 /*   By: aagharbi <aagharbi@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 10:08:08 by aagharbi          #+#    #+#             */
-/*   Updated: 2024/10/27 16:20:06 by aagharbi         ###   ########.fr       */
+/*   Updated: 2024/11/03 11:24:05 by aagharbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ void	*ft_memmove(void *dest, const void *src, size_t len)
 
 	dst = dest;
 	srcc = src;
-	if( dst == srcc)
+	if (dst == srcc)
 		return (dest);
-	if(dst > srcc && srcc + len >= dst)
+	if (dst > srcc && srcc + len >= dst)
 	{
 		dst += len;
 		srcc += len;

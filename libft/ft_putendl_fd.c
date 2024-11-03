@@ -6,7 +6,7 @@
 /*   By: aagharbi <aagharbi@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 15:54:00 by aagharbi          #+#    #+#             */
-/*   Updated: 2024/11/02 20:42:06 by aagharbi         ###   ########.fr       */
+/*   Updated: 2024/11/03 11:33:58 by aagharbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 void	ft_putendl_fd(char *s, int fd)
 {
 	if (!s)
-		return;
+		return ;
 	while (*s)
 	{
 		write(fd, s, 1);
 		s++;
 	}
-	write(fd,"\n", 1);
+	write(fd, "\n", 1);
 }
