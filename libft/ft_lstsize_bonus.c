@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memchr.c                                        :+:      :+:    :+:   */
+/*   ft_lstsize_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aagharbi <aagharbi@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/24 15:01:01 by aagharbi          #+#    #+#             */
-/*   Updated: 2024/11/07 21:06:01 by aagharbi         ###   ########.fr       */
+/*   Created: 2024/11/06 18:26:06 by aagharbi          #+#    #+#             */
+/*   Updated: 2024/11/07 21:06:54 by aagharbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memchr(const void *s, int c, size_t n)
+int	ft_lstsize(t_list *lst)
 {
-	unsigned int	i;
-	unsigned char	*ss;
+	int	count;
 
-	ss = (unsigned char *)s;
-	i = 0;
-	while (i < n)
+	if (!lst)
+		return (0);
+	count = 0;
+	while (lst)
 	{
-		if (ss[i] == (unsigned char)c)
-			return ((void *)s + i);
-		i++;
+		count++;
+		lst = lst->next;
 	}
-	return (NULL);
+	return (count);
 }

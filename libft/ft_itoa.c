@@ -6,18 +6,18 @@
 /*   By: aagharbi <aagharbi@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 13:08:32 by aagharbi          #+#    #+#             */
-/*   Updated: 2024/11/03 20:45:00 by aagharbi         ###   ########.fr       */
+/*   Updated: 2024/11/07 20:54:01 by aagharbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_nb_len(int nb)
+static size_t	ft_nb_len(int nb)
 {
 	int	len;
 
 	len = 0;
-	if (nb <= 0)
+	if (nb < 0)
 		len++;
 	while (nb)
 	{

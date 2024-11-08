@@ -6,7 +6,7 @@
 /*   By: aagharbi <aagharbi@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 17:31:59 by aagharbi          #+#    #+#             */
-/*   Updated: 2024/11/03 15:02:02 by aagharbi         ###   ########.fr       */
+/*   Updated: 2024/11/05 14:53:35 by aagharbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,7 @@ static void	fill(char const *s, char c, char **lst)
 char	**ft_split(char const *s, char c)
 {
 	char	**lst;
-	int		i;
 
-	i = 0;
 	if (!s)
 		return (NULL);
 	lst = malloc((count_words(s, c) + 1) * sizeof(char *));

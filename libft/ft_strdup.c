@@ -6,7 +6,7 @@
 /*   By: aagharbi <aagharbi@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 11:25:23 by aagharbi          #+#    #+#             */
-/*   Updated: 2024/11/03 11:25:28 by aagharbi         ###   ########.fr       */
+/*   Updated: 2024/11/07 19:51:47 by aagharbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*ft_strdup(const char *s)
 	char	*str;
 	char	*start;
 
-	str = (char *) malloc(ft_strlen(s) + 1);
+	str = malloc(ft_strlen(s) + 1);
 	if (!str)
 		return (NULL);
 	start = str;
