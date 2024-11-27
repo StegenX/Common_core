@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aagharbi <aagharbi@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/23 17:19:25 by aagharbi          #+#    #+#             */
-/*   Updated: 2024/11/26 19:55:42 by aagharbi         ###   ########.fr       */
+/*   Created: 2024/11/25 19:56:23 by aagharbi          #+#    #+#             */
+/*   Updated: 2024/11/26 20:01:01 by aagharbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 static int	new_line(const char *s)
 {
@@ -43,7 +43,7 @@ static char	*get_next(char **rest, char *line, char *buffer)
 
 static char	*get_line(int fd, int checker, char *line, char *buffer)
 {
-	static char	*rest;
+	static char	*rest[1024];
 	char		*temp;
 
 	while (checker > 0)
@@ -52,20 +52,20 @@ static char	*get_line(int fd, int checker, char *line, char *buffer)
 		if (checker < 0)
 			return (free(buffer), NULL);
 		buffer[checker] = '\0';
-		temp = rest;
-		rest = ft_strjoin(rest, buffer);
+		temp = rest[fd];
+		rest[fd] = ft_strjoin(rest[fd], buffer);
 		free(temp);
-		if (new_line(rest))
+		if (new_line(rest[fd]))
 		{
-			line = ft_strchr(rest);
-			temp = rest;
-			rest = ft_strdup(rest + ft_strlen(line));
+			line = ft_strchr(rest[fd]);
+			temp = rest[fd];
+			rest[fd] = ft_strdup(rest[fd] + ft_strlen(line));
 			free(temp);
 			free(buffer);
 			return (line);
 		}
 	}
-	return (get_next(&rest, line, buffer));
+	return (get_next(&rest[fd], line, buffer));
 }
 
 char	*get_next_line(int fd)
