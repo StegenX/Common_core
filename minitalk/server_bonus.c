@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   server_bonus_new.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aagharbi <aagharbi@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/08 14:39:38 by aagharbi          #+#    #+#             */
-/*   Updated: 2025/02/08 14:39:40 by aagharbi         ###   ########.fr       */
+/*   Created: 2025/02/08 13:32:07 by aagharbi          #+#    #+#             */
+/*   Updated: 2025/02/08 13:32:36 by aagharbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,24 @@
 #include <signal.h>
 #include <unistd.h>
 
-static void	handle_signal(int signum, siginfo_t *info, void *context)
+int			g_null;
+
+static void	handle_signal_server(int signum, siginfo_t *info, void *context)
 {
 	static char	c;
 	static int	bit_count;
 
 	context = NULL;
 	if (signum == SIGUSR1)
+	{
 		c |= (0 << bit_count);
+		g_null++;
+	}
 	else if (signum == SIGUSR2)
+	{
 		c |= (1 << bit_count);
+		g_null = 0;
+	}
 	bit_count++;
 	if (bit_count == 8)
 	{
@@ -31,14 +39,17 @@ static void	handle_signal(int signum, siginfo_t *info, void *context)
 		c = 0;
 		bit_count = 0;
 	}
-	kill(info->si_pid, SIGUSR2);
+	if (g_null == 8)
+		kill(info->si_pid, SIGUSR1);
+	else
+		kill(info->si_pid, SIGUSR2);
 }
 
 int	main(void)
 {
 	struct sigaction	sa;
 
-	sa.sa_sigaction = handle_signal;
+	sa.sa_sigaction = handle_signal_server;
 	sa.sa_flags = SA_SIGINFO;
 	sigemptyset(&sa.sa_mask);
 	sigaction(SIGUSR1, &sa, NULL);

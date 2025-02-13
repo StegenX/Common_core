@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   client_bonus_new.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aagharbi <aagharbi@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/08 14:39:47 by aagharbi          #+#    #+#             */
-/*   Updated: 2025/02/08 14:39:49 by aagharbi         ###   ########.fr       */
+/*   Created: 2025/02/08 13:32:53 by aagharbi          #+#    #+#             */
+/*   Updated: 2025/02/08 13:33:16 by aagharbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ int		g_handler;
 
 void	handler(int sig)
 {
-	if (sig == SIGUSR2)
+	if (sig == SIGUSR1)
+		ft_printf("Message Recived !!\n");
+	else if (sig == SIGUSR2)
 		g_handler = 1;
 }
 
@@ -43,6 +45,19 @@ int	ft_atoi(const char *nptr)
 		nptr++;
 	}
 	return (nb * sign);
+}
+
+void	send_null(int pid)
+{
+	int	i;
+
+	i = 0;
+	while (i < 8)
+	{
+		kill(pid, SIGUSR1);
+		i++;
+		usleep(100);
+	}
 }
 
 void	send_signal(int PID, char *message)
@@ -70,6 +85,7 @@ void	send_signal(int PID, char *message)
 			g_handler = 0;
 		}
 	}
+	send_null(PID);
 }
 
 int	main(int ac, char **av)
@@ -81,6 +97,7 @@ int	main(int ac, char **av)
 		write(2, "Error\n", 6);
 		return (0);
 	}
+	signal(SIGUSR1, handler);
 	signal(SIGUSR2, handler);
 	pid = ft_atoi(av[1]);
 	if (pid <= 0)
