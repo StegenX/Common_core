@@ -6,7 +6,7 @@
 /*   By: aagharbi <aagharbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 17:20:56 by aagharbi          #+#    #+#             */
-/*   Updated: 2025/03/05 17:20:57 by aagharbi         ###   ########.fr       */
+/*   Updated: 2025/03/11 17:04:30 by aagharbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,16 @@ void	*philosopher_routine(void *arg)
 
 	philo = (t_philo *)arg;
 	if (philo->id % 2 == 0)
-		usleep(5000);
+		usleep(1000);
 	while (is_simulation_running(philo->data))
 	{
 		print_action(philo, "is thinking");
 		usleep(1000);
 		take_forks(philo);
 		print_action(philo, "is eating");
+		pthread_mutex_lock(&philo->data->meals);
+		philo->meals_eaten++;
+		pthread_mutex_unlock(&philo->data->meals);
 		pthread_mutex_lock(&philo->data->lock_meal);
 		philo->last_meal = get_time();
 		pthread_mutex_unlock(&philo->data->lock_meal);
@@ -36,33 +39,42 @@ void	*philosopher_routine(void *arg)
 	return (NULL);
 }
 
-void	monitor_philosophers(t_data *data)
+void	*monitor_philosophers(void *arg)
 {
-	int			i;
+	// int			i;
 	long long	last;
+	int meals;
+	t_data	*data;
+
+	data = (t_data *)arg;
 
 	while (is_simulation_running(data))
 	{
-		i = 0;
-		while (i < data->num_philos)
-		{
+	
 			pthread_mutex_lock(&data->sim_end);
 			pthread_mutex_lock(&data->lock_meal);
-			last = data->philos[i].last_meal;
+			last = data->philos->last_meal;
 			pthread_mutex_unlock(&data->lock_meal);
-			if ((get_time() - last) > data->time_to_die)
+			pthread_mutex_lock(&data->meals);
+			meals = data->philos->meals_eaten;
+			pthread_mutex_unlock(&data->meals);
+			if ((get_time() - last) > data->time_to_die )
 			{
 				data->simulation_end = 1;
 				printf("%lld %d died\n", get_time() - data->start_time,
-					data->philos[i].id);
+					data->philos->id);
 				pthread_mutex_unlock(&data->sim_end);
-				return ;
+				return NULL;
+			}
+			else if (meals == data->num_meals)
+			{
+				data->simulation_end = 1;
+				pthread_mutex_unlock(&data->sim_end);
+				return NULL;
 			}
 			pthread_mutex_unlock(&data->sim_end);
-			i++;
 		}
-		usleep(5000);
-	}
+		return NULL;
 }
 
 int	main(int argc, char **argv)
@@ -81,13 +93,16 @@ int	main(int argc, char **argv)
 	{
 		pthread_create(&data.philos[i].thread, NULL, philosopher_routine,
 			&data.philos[i]);
+		pthread_create(&data.philos[i].thread_monitor, NULL, monitor_philosophers,
+			&data);
 		i++;
 	}
-	monitor_philosophers(&data);
+	// monitor_philosophers(&data);
 	i = 0;
 	while (i < data.num_philos)
 	{
 		pthread_join(data.philos[i].thread, NULL);
+		pthread_join(data.philos[i].thread_monitor, NULL);
 		i++;
 	}
 	clean_up(&data);
