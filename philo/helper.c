@@ -6,7 +6,7 @@
 /*   By: aagharbi <aagharbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 17:21:06 by aagharbi          #+#    #+#             */
-/*   Updated: 2025/03/13 17:41:43 by aagharbi         ###   ########.fr       */
+/*   Updated: 2025/03/17 17:19:20 by aagharbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,11 @@ void	clean_up(t_data *data)
 	pthread_mutex_destroy(&data->mutex.lock_meal);
 	pthread_mutex_destroy(&data->mutex.check_sim);
 	pthread_mutex_destroy(&data->mutex.monitor_lock);
+	pthread_mutex_destroy(&data->mutex.monitor);
+	pthread_mutex_destroy(&data->mutex.check_con);
+	pthread_mutex_destroy(&data->mutex.check_con2);
+	pthread_mutex_destroy(&data->mutex.check_philo);
+	pthread_mutex_destroy(&data->mutex.philo);
 	free(data->forks);
 	free(data->philos);
 }

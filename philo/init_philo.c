@@ -6,7 +6,7 @@
 /*   By: aagharbi <aagharbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 17:21:12 by aagharbi          #+#    #+#             */
-/*   Updated: 2025/03/13 16:31:33 by aagharbi         ###   ########.fr       */
+/*   Updated: 2025/03/17 18:00:46 by aagharbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	init_data(t_data *data, char **argv, int ac)
 	else
 		data->num_meals = -1;
 	data->simulation_end = 0;
+	// data->meals_monitoring = data->num_meals;
 	data->forks = malloc(sizeof(pthread_mutex_t) * data->num_philos);
 	data->philos = malloc(sizeof(t_philo) * data->num_philos);
 	if (!data->forks || !data->philos)
@@ -48,6 +49,7 @@ void	init_philosophers(t_data *data)
 	{
 		data->philos[i].id = i + 1;
 		data->philos[i].meals_eaten = 0;
+		// data->philos[i].eaten_monitoring = 0;
 		data->philos[i].last_meal = get_time();
 		data->philos[i].left_fork = &data->forks[i];
 		data->philos[i].right_fork = &data->forks[(i + 1) % data->num_philos];
@@ -60,10 +62,15 @@ void	init_norm(t_data *data)
 {
 	pthread_mutex_init(&data->mutex.sim_end, NULL);
 	pthread_mutex_init(&data->mutex.monitor_lock, NULL);
+	pthread_mutex_init(&data->mutex.monitor, NULL);
 	pthread_mutex_init(&data->mutex.check_sim, NULL);
 	pthread_mutex_init(&data->mutex.lock, NULL);
 	pthread_mutex_init(&data->mutex.lock_meal, NULL);
 	pthread_mutex_init(&data->mutex.print_lock, NULL);
+	pthread_mutex_init(&data->mutex.check_con, NULL);
+	pthread_mutex_init(&data->mutex.check_con2, NULL);
+	pthread_mutex_init(&data->mutex.check_philo, NULL);
+	pthread_mutex_init(&data->mutex.philo, NULL);
 	// pthread_mutex_init(&data->meals, NULL);
 	
 }
