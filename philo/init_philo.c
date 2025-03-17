@@ -6,7 +6,7 @@
 /*   By: aagharbi <aagharbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 17:21:12 by aagharbi          #+#    #+#             */
-/*   Updated: 2025/03/05 17:25:29 by aagharbi         ###   ########.fr       */
+/*   Updated: 2025/03/13 16:31:33 by aagharbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,6 @@ void	init_norm(t_data *data)
 	pthread_mutex_init(&data->lock, NULL);
 	pthread_mutex_init(&data->lock_meal, NULL);
 	pthread_mutex_init(&data->print_lock, NULL);
+	// pthread_mutex_init(&data->meals, NULL);
+	
 }

@@ -6,7 +6,7 @@
 /*   By: aagharbi <aagharbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 17:21:09 by aagharbi          #+#    #+#             */
-/*   Updated: 2025/03/05 17:25:38 by aagharbi         ###   ########.fr       */
+/*   Updated: 2025/03/13 17:59:53 by aagharbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@ void	take_forks(t_philo *philo)
 	{
 		pthread_mutex_lock(philo->left_fork);
 		print_action(philo, "has taken a fork");
+		if (philo->data->num_philos == 1)
+		{
+			pthread_mutex_unlock(&philo->data->lock);
+			return ;
+		}
 		pthread_mutex_unlock(&philo->data->lock);
 		pthread_mutex_lock(philo->right_fork);
 		print_action(philo, "has taken a fork");
@@ -44,6 +49,11 @@ void	print_action(t_philo *philo, char *action)
 
 void	drop_forks(t_philo *philo)
 {
+	if (philo->data->num_philos == 1)
+	{
+		pthread_mutex_unlock(philo->left_fork);
+		return ;
+	}
 	pthread_mutex_unlock(philo->left_fork);
 	pthread_mutex_unlock(philo->right_fork);
 }

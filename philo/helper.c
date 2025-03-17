@@ -6,7 +6,7 @@
 /*   By: aagharbi <aagharbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 17:21:06 by aagharbi          #+#    #+#             */
-/*   Updated: 2025/03/05 17:26:00 by aagharbi         ###   ########.fr       */
+/*   Updated: 2025/03/13 17:41:43 by aagharbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	clean_up(t_data *data)
 		i++;
 	}
 	pthread_mutex_destroy(&data->print_lock);
+	// pthread_mutex_destroy(&data->meals);
 	pthread_mutex_destroy(&data->sim_end);
 	pthread_mutex_destroy(&data->lock);
 	pthread_mutex_destroy(&data->lock_meal);
@@ -35,7 +36,7 @@ int	is_simulation_running(t_data *data)
 	int	running;
 
 	pthread_mutex_lock(&data->sim_end);
-	running = !data->simulation_end;
+	running = data->simulation_end;
 	pthread_mutex_unlock(&data->sim_end);
 	return (running);
 }
