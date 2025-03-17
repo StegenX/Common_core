@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aagharbi <aagharbi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stegen <stegen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 17:21:17 by aagharbi          #+#    #+#             */
-/*   Updated: 2025/03/13 18:06:20 by aagharbi         ###   ########.fr       */
+/*   Updated: 2025/03/17 07:57:26 by stegen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,17 @@ typedef struct s_philo
 	pthread_t		thread;
 }					t_philo;
 
+typedef struct s_mutex
+{
+	pthread_mutex_t	meals;
+	pthread_mutex_t	sim_end;
+	pthread_mutex_t	lock;
+	pthread_mutex_t	lock_meal;
+	pthread_mutex_t	print_lock;
+	pthread_mutex_t	monitor_lock;
+	pthread_mutex_t	check_sim;
+}	t_mutex;
+
 typedef struct s_data
 {
 	int				num_philos;
@@ -39,13 +50,9 @@ typedef struct s_data
 	int				num_meals;
 	long long		start_time;
 	int				simulation_end;
-	pthread_mutex_t	meals;
-	pthread_mutex_t	sim_end;
-	pthread_mutex_t	lock;
-	pthread_mutex_t	lock_meal;
-	pthread_mutex_t	print_lock;
-	pthread_mutex_t	*forks;
 	t_philo			*philos;
+	t_mutex			mutex;
+	pthread_mutex_t	*forks;
 	pthread_t		thread_monitor;
 }					t_data;
 
@@ -54,7 +61,7 @@ void				print_action(t_philo *philo, char *action);
 int					init_data(t_data *data, char **argv, int ac);
 void				init_philosophers(t_data *data);
 void				*philosopher_routine(void *arg);
-void	monitor_philosophers(t_data *data);
+void	*monitor_philosophers(void *arg);
 void				clean_up(t_data *data);
 void				drop_forks(t_philo *philo);
 int					is_simulation_running(t_data *data);

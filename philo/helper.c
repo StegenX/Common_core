@@ -22,11 +22,13 @@ void	clean_up(t_data *data)
 		pthread_mutex_destroy(&data->forks[i]);
 		i++;
 	}
-	pthread_mutex_destroy(&data->print_lock);
+	pthread_mutex_destroy(&data->mutex.print_lock);
 	// pthread_mutex_destroy(&data->meals);
-	pthread_mutex_destroy(&data->sim_end);
-	pthread_mutex_destroy(&data->lock);
-	pthread_mutex_destroy(&data->lock_meal);
+	pthread_mutex_destroy(&data->mutex.sim_end);
+	pthread_mutex_destroy(&data->mutex.lock);
+	pthread_mutex_destroy(&data->mutex.lock_meal);
+	pthread_mutex_destroy(&data->mutex.check_sim);
+	pthread_mutex_destroy(&data->mutex.monitor_lock);
 	free(data->forks);
 	free(data->philos);
 }
@@ -35,9 +37,9 @@ int	is_simulation_running(t_data *data)
 {
 	int	running;
 
-	pthread_mutex_lock(&data->sim_end);
+	pthread_mutex_lock(&data->mutex.check_sim);
 	running = data->simulation_end;
-	pthread_mutex_unlock(&data->sim_end);
+	pthread_mutex_unlock(&data->mutex.check_sim);
 	return (running);
 }
 

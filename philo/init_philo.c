@@ -58,10 +58,12 @@ void	init_philosophers(t_data *data)
 
 void	init_norm(t_data *data)
 {
-	pthread_mutex_init(&data->sim_end, NULL);
-	pthread_mutex_init(&data->lock, NULL);
-	pthread_mutex_init(&data->lock_meal, NULL);
-	pthread_mutex_init(&data->print_lock, NULL);
+	pthread_mutex_init(&data->mutex.sim_end, NULL);
+	pthread_mutex_init(&data->mutex.monitor_lock, NULL);
+	pthread_mutex_init(&data->mutex.check_sim, NULL);
+	pthread_mutex_init(&data->mutex.lock, NULL);
+	pthread_mutex_init(&data->mutex.lock_meal, NULL);
+	pthread_mutex_init(&data->mutex.print_lock, NULL);
 	// pthread_mutex_init(&data->meals, NULL);
 	
 }
