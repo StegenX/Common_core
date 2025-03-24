@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aagharbi <aagharbi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stegen <stegen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 17:21:17 by aagharbi          #+#    #+#             */
-/*   Updated: 2025/03/17 18:01:06 by aagharbi         ###   ########.fr       */
+/*   Updated: 2025/03/20 17:05:00 by stegen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef struct s_philo
 {
 	int				id;
 	int				meals_eaten;
-	// int 			eaten_monitoring;
+	int 			eaten_monitoring;
 	long long		last_meal;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
@@ -54,7 +54,7 @@ typedef struct s_data
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				num_meals;
-	// int				meals_monitoring;
+	int				meals_monitoring;
 	long long		start_time;
 	int				simulation_end;
 	t_philo			*philos;
@@ -74,5 +74,14 @@ void				drop_forks(t_philo *philo);
 int					is_simulation_running(t_data *data);
 void				init_norm(t_data *data);
 void				take_forks(t_philo *philo);
+void set_joining(t_data *data);
+int check_for_monitoring(t_philo *philo);
+int check_condition(t_philo *philo);
+int check_condition2(t_philo *philo);
+int check_philos(t_philo *philo);
+int is_simulation_end(t_data *data);
+void set_simulation_end(t_data *data);
+long long get_last_meal(t_philo *philo);
+void set_last_meal(t_philo *philo);
 
 #endif

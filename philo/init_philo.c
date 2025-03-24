@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_philo.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aagharbi <aagharbi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stegen <stegen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 17:21:12 by aagharbi          #+#    #+#             */
-/*   Updated: 2025/03/17 18:00:46 by aagharbi         ###   ########.fr       */
+/*   Updated: 2025/03/24 01:14:36 by stegen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	init_data(t_data *data, char **argv, int ac)
 	else
 		data->num_meals = -1;
 	data->simulation_end = 0;
-	// data->meals_monitoring = data->num_meals;
+	data->meals_monitoring = data->num_meals;
 	data->forks = malloc(sizeof(pthread_mutex_t) * data->num_philos);
 	data->philos = malloc(sizeof(t_philo) * data->num_philos);
 	if (!data->forks || !data->philos)
@@ -49,7 +49,7 @@ void	init_philosophers(t_data *data)
 	{
 		data->philos[i].id = i + 1;
 		data->philos[i].meals_eaten = 0;
-		// data->philos[i].eaten_monitoring = 0;
+		data->philos[i].eaten_monitoring = 0;
 		data->philos[i].last_meal = get_time();
 		data->philos[i].left_fork = &data->forks[i];
 		data->philos[i].right_fork = &data->forks[(i + 1) % data->num_philos];

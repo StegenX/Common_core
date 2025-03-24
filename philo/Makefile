@@ -2,9 +2,9 @@ NAME = philo
 
 CC = cc
 
-CFLAGS = -g -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 
-SRC = philosophers.c helper.c action.c init_philo.c
+SRC = philosophers.c helper.c action.c init_philo.c set.c check.c
 
 OBJ = $(SRC:.c=.o)
 
