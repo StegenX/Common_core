@@ -6,7 +6,7 @@
 /*   By: aagharbi <aagharbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 17:21:06 by aagharbi          #+#    #+#             */
-/*   Updated: 2025/03/17 17:19:20 by aagharbi         ###   ########.fr       */
+/*   Updated: 2025/04/02 08:25:54 by aagharbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	clean_up(t_data *data)
 		i++;
 	}
 	pthread_mutex_destroy(&data->mutex.print_lock);
-	// pthread_mutex_destroy(&data->meals);
 	pthread_mutex_destroy(&data->mutex.sim_end);
 	pthread_mutex_destroy(&data->mutex.lock);
 	pthread_mutex_destroy(&data->mutex.lock_meal);
@@ -54,4 +53,24 @@ long long	get_time(void)
 
 	gettimeofday(&tv, NULL);
 	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
+}
+
+int	ft_atoi(const char *nptr, t_data *my_data)
+{
+	int	nb;
+
+	nb = 0;
+	while ((*nptr >= 9 && *nptr <= 13) || *nptr == 32)
+		nptr++;
+	if (*nptr == '+' || *nptr == '-')
+	{
+		if (*nptr++ == '-')
+			my_data->negative_value = 1;
+	}
+	while (*nptr >= 48 && *nptr <= 57)
+	{
+		nb = nb * 10 + (*nptr - 48);
+		nptr++;
+	}
+	return (nb);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_philo.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stegen <stegen@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aagharbi <aagharbi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 17:21:12 by aagharbi          #+#    #+#             */
-/*   Updated: 2025/03/24 01:14:36 by stegen           ###   ########.fr       */
+/*   Updated: 2025/04/02 08:26:30 by aagharbi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,18 @@ int	init_data(t_data *data, char **argv, int ac)
 	int	i;
 
 	i = 0;
-	data->num_philos = atoi(argv[1]);
-	data->time_to_die = atoi(argv[2]);
-	data->time_to_eat = atoi(argv[3]);
-	data->time_to_sleep = atoi(argv[4]);
+	data->num_philos = ft_atoi(argv[1], data);
+	data->time_to_die = ft_atoi(argv[2], data);
+	data->time_to_eat = ft_atoi(argv[3], data);
+	data->time_to_sleep = ft_atoi(argv[4], data);
 	if (ac == 6)
-		data->num_meals = atoi(argv[5]);
+		data->num_meals = ft_atoi(argv[5], data);
 	else
 		data->num_meals = -1;
 	data->simulation_end = 0;
 	data->meals_monitoring = data->num_meals;
+	if (data->negative_value || !data->num_philos)
+		return (1);
 	data->forks = malloc(sizeof(pthread_mutex_t) * data->num_philos);
 	data->philos = malloc(sizeof(t_philo) * data->num_philos);
 	if (!data->forks || !data->philos)
@@ -36,8 +38,7 @@ int	init_data(t_data *data, char **argv, int ac)
 		pthread_mutex_init(&data->forks[i], NULL);
 		i++;
 	}
-	init_norm(data);
-	return (0);
+	return (init_norm(data), 0);
 }
 
 void	init_philosophers(t_data *data)
@@ -71,6 +72,4 @@ void	init_norm(t_data *data)
 	pthread_mutex_init(&data->mutex.check_con2, NULL);
 	pthread_mutex_init(&data->mutex.check_philo, NULL);
 	pthread_mutex_init(&data->mutex.philo, NULL);
-	// pthread_mutex_init(&data->meals, NULL);
-	
 }

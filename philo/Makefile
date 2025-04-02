@@ -19,4 +19,8 @@ clean :
 fclean : clean
 	rm -f $(NAME)
 
+cl :
+	clear
+ra : all clean cl
+
 .PHONY : clean fclean all  
